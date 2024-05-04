@@ -8,7 +8,7 @@ void App::initWindow()
     */
     this->videoMode.width = 480;
     this->videoMode.height = 800;
-    this->window = new sf::RenderWindow(this->videoMode, "Pong", sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(this->videoMode, "Timberman", sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(144);
 }
 
