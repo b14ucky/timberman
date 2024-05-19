@@ -3,6 +3,8 @@
 #include "State.h"
 #include "StateManager.h"
 
+#include <iostream> /*for testing only*/
+
 class GameState : public State
 {
 private:
@@ -14,4 +16,5 @@ public:
     void handleInput() override;
     void update() override;
     void render() override;
+    void handleEvent(sf::Event event) override;
 };

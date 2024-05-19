@@ -15,4 +15,5 @@ public:
     void setState(std::unique_ptr<State> newState);
     void update();
     void render();
+    void handleEvent(sf::Event event);
 };
