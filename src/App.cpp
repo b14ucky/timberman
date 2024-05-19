@@ -73,6 +73,7 @@ void App::run()
             {
                 this->window->close();
             }
+            this->stateManager->handleEvent(this->event);
         }
         this->update();
         this->render();

@@ -15,3 +15,8 @@ void StateManager::render()
 {
     this->currentState->render();
 }
+
+void StateManager::handleEvent(sf::Event event)
+{
+    this->currentState->handleEvent(event);
+}
