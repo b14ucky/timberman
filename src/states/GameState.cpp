@@ -19,10 +19,12 @@ void GameState::update()
 
 void GameState::render()
 {
-    sf::RectangleShape shape(sf::Vector2f(100, 100));
-    shape.setFillColor(sf::Color::Black);
-    shape.setPosition(this->window->getSize().x / 2 - shape.getSize().x / 2, this->window->getSize().y / 2 - shape.getSize().y / 2);
-    this->window->draw(shape);
+    sf::Texture texture;
+    texture.loadFromFile("./assets/textures/test_texture.png", sf::IntRect(100, 100, 100, 100));
+    sf::Vector2f position(0, 0);
+    Lumberjack lumberjack(texture, position);
+    lumberjack.setColor(sf::Color::Black);
+    this->window->draw(lumberjack);
 }
 
 void GameState::handleEvent(sf::Event event)

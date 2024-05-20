@@ -2,6 +2,7 @@
 
 #include "State.h"
 #include "StateManager.h"
+#include "Lumberjack.h"
 
 #include <iostream> /*for testing only*/
 
