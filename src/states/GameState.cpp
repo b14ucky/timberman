@@ -19,11 +19,10 @@ void GameState::update()
 
 void GameState::render()
 {
-    sf::Texture texture;
-    texture.loadFromFile("./assets/textures/test_texture.png", sf::IntRect(100, 100, 100, 100));
     sf::Vector2f position(0, 0);
-    Lumberjack lumberjack(texture, position);
-    lumberjack.setColor(sf::Color::Black);
+    Lumberjack lumberjack("./assets/textures/lumberjack.png", position);
+    // lumberjack.setColor(sf::Color::Black);
+    lumberjack.setScale(0.25, 0.25);
     this->window->draw(lumberjack);
 }
 
