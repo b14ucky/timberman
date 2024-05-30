@@ -5,11 +5,12 @@ Lumberjack::Lumberjack()
     /*Lumberjack class default consturctor*/
 }
 
-Lumberjack::Lumberjack(sf::Texture texture, sf::Vector2f position)
+Lumberjack::Lumberjack(std::string texturePath, sf::Vector2f position)
 {
     /*Lumberjack class parameterized consturcor*/
+    this->texture.loadFromFile(texturePath);
     this->setPosition(position);
-    this->setTexture(texture);
+    this->setTexture(this->texture);
 }
 
 sf::Vector2f Lumberjack::getSize()
