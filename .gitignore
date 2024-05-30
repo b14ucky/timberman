@@ -429,3 +429,4 @@ FodyWeavers.xsd
 *.exe
 *.out
 *.app
+/.vs/timberman2/v17/Browse.VC.db
