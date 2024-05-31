@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Branch.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Lumberjack.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Branch.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Lumberjack.h" />
     <ClInclude Include="State.h" />
