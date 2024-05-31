@@ -13,4 +13,5 @@ public:
     sf::Vector2f getSize();
     void moveLeft();
     void moveRight();
+    void render(sf::RenderWindow* window);
 };
