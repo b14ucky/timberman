@@ -1,9 +1,24 @@
 #include "GameState.h"
+#include <vector>
 
 void GameState::initBackground() {
     this->backgroundTexture.loadFromFile("./assets/textures/background.png");
     this->backgroundSprite.setTexture(backgroundTexture);
     this->backgroundSprite.setScale(1.25, 1.02);
+}
+
+void GameState::initBranches() {
+    
+    for (int i = 0; i < quantityOfBranches; i++)
+    {
+        int level = i + 1;
+        int yAxis = 770 - level * 125; // equation, that calculate location (yAxis) of branch
+        Branches.push_back(Branch("./assets/textures/branch.png", level, yAxis));
+    }
+}
+
+void GameState::initVariable() {
+    quantityOfBranches = 6;
 }
 
 GameState::GameState() {}
@@ -12,6 +27,8 @@ GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::F
 {
     this->font = font;
     this->initBackground();
+    this->initVariable();
+    this->initBranches();
 }
 
 void GameState::handleInput()
@@ -31,6 +48,11 @@ void GameState::render()
     Lumberjack lumberjack("./assets/textures/lumberjack.png", position);
     lumberjack.setScale(0.25, 0.25);
     lumberjack.render(this->window);
+
+    for (int i = 0; i < quantityOfBranches; i++)
+    {
+        Branches[i].render(this->window);
+    }
 }
 
 void GameState::handleEvent(sf::Event event)
