@@ -17,7 +17,7 @@ void App::initFont()
     /*
         Initializes the font of the game. Loads the font from the file.
     */
-    if (!this->font.loadFromFile("./assets/fonts/" /*CHANGE TO ACTUAL FONT PATH*/))
+    if (!this->font.loadFromFile("./assets/fonts/arial.ttf"))
     {
         std::cout << "ERROR::APP::INITFONT::Failed to load font!" << std::endl;
     }
@@ -63,7 +63,7 @@ void App::run()
     /*
         The run function of the App class. Runs the game loop.
     */
-    this->stateManager->setState(std::make_unique<GameState /*!!! CHANGE TO MENU STATE AFTER IMPLEMENTING IT !!!*/>(this->window, this->stateManager, this->font));
+    this->stateManager->setState(std::make_unique<MenuState>(this->window, this->stateManager, this->font));
 
     while (this->window->isOpen())
     {

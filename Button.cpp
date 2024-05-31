@@ -11,3 +11,7 @@ Button::Button(std::string text, sf::Font& font, unsigned int charSize, sf::Colo
     this->setOrigin(this->getGlobalBounds().getSize().x / 2, this->getGlobalBounds().getSize().y);
     this->setPosition(position);
 }
+
+void Button::render(sf::RenderWindow *window) {
+    window->draw(*this);
+}
