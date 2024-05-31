@@ -10,6 +10,9 @@ class GameState : public State
 {
 private:
     sf::Font font;
+    sf::Texture backgroundTexture;
+    sf::Sprite backgroundSprite;
+    void initBackground();
 
 public:
     GameState();
