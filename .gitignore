@@ -431,3 +431,4 @@ FodyWeavers.xsd
 *.app
 /.vs/timberman2/v17/Browse.VC.db
 *.sln
+/timberman2.vcxproj

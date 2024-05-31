@@ -28,3 +28,7 @@ void Lumberjack::moveRight()
 {
     // TODO
 }
+
+void Lumberjack::render(sf::RenderWindow* window) {
+    window->draw(*this);
+}

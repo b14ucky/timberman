@@ -22,7 +22,7 @@ void GameState::render()
     sf::Vector2f position(0, 600);
     Lumberjack lumberjack("./assets/textures/lumberjack.png", position);
     lumberjack.setScale(0.25, 0.25);
-    this->window->draw(lumberjack);
+    lumberjack.render(this->window);
 }
 
 void GameState::handleEvent(sf::Event event)
