@@ -1,10 +1,17 @@
 #include "GameState.h"
 
+void GameState::initBackground() {
+    this->backgroundTexture.loadFromFile("./assets/textures/background.png");
+    this->backgroundSprite.setTexture(backgroundTexture);
+    this->backgroundSprite.setScale(1.25, 1.02);
+}
+
 GameState::GameState() {}
 
 GameState::GameState(sf::RenderWindow *window, StateManager *stateManager, sf::Font &font) : State(window, stateManager)
 {
     this->font = font;
+    this->initBackground();
 }
 
 void GameState::handleInput()
@@ -19,6 +26,7 @@ void GameState::update()
 
 void GameState::render()
 {
+    this->window->draw(this->backgroundSprite);
     sf::Vector2f position(0, 600);
     Lumberjack lumberjack("./assets/textures/lumberjack.png", position);
     lumberjack.setScale(0.25, 0.25);
