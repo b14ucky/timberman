@@ -6,8 +6,7 @@
 #include <iostream>
 
 #include "StateManager.h"
-// !!! CHANGE TO MENU STATE AFTER IMPLEMENTING IT !!!
-#include "GameState.h"
+#include "MenuState.h"
 
 class App
 {

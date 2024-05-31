@@ -8,7 +8,7 @@ void GameState::initBackground() {
 
 GameState::GameState() {}
 
-GameState::GameState(sf::RenderWindow *window, StateManager *stateManager, sf::Font &font) : State(window, stateManager)
+GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
 {
     this->font = font;
     this->initBackground();
