@@ -2,12 +2,12 @@
 
 Lumberjack::Lumberjack()
 {
-    /*Lumberjack class default consturctor*/
+    /*Lumberjack class default constructor*/
 }
 
 Lumberjack::Lumberjack(std::string texturePath, sf::Vector2f position)
 {
-    /*Lumberjack class parameterized consturcor*/
+    /*Lumberjack class parameterized constructor*/
     this->texture.loadFromFile(texturePath);
     this->setPosition(position);
     this->setTexture(this->texture);
