@@ -10,7 +10,7 @@ class Branch : public sf::Sprite
 {
 private:
 	sf::Texture *texture;
-	bool side{}; // left - 0, right - 1
+	bool side{}; // left - 1, right - 0
 	int level{}; // 1-5
 	int xAxis{}; // left < right
 	int yAxis{}; // 1 < 2 < ... < 5

@@ -11,6 +11,7 @@ Lumberjack::Lumberjack(std::string texturePath, sf::Vector2f position)
     this->texture.loadFromFile(texturePath);
     this->setPosition(position);
     this->setTexture(this->texture);
+    this->setScale(0.23, 0.23);
 }
 
 sf::Vector2f Lumberjack::getSize()
