@@ -19,6 +19,7 @@ private:
     std::vector<Branch> Branches;
     int quantityOfBranches;
     void initVariable();
+    Lumberjack lumberjack;
 
 public:
     GameState();
