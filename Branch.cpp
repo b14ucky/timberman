@@ -6,7 +6,7 @@ Branch::Branch()
 	/*Branch class default constructor*/
 }
 
-Branch::Branch(std::string texturePath, int level, int yAxis)
+Branch::Branch(std::string texturePath, int level)
 {
 	/*Branch class parameterized constructor*/
 	this->texture = new sf::Texture;
@@ -25,7 +25,7 @@ Branch::Branch(std::string texturePath, int level, int yAxis)
 		this->setScale(-1, 1);
 	}
 
-	this->setPosition(xAxis, yAxis);
+	this->setLevel(level);
 }
 
 bool Branch::randomizeSide() {
@@ -37,4 +37,16 @@ bool Branch::randomizeSide() {
 
 void Branch::render(sf::RenderWindow* window) {
 	window->draw(*this);
+}
+
+void Branch::setLevel(int level)
+{
+	this->level = level;
+	// equation, that calculates y position (yAxis) of branch
+	this->yAxis = 732 - this->level * 160;
+	this->setPosition(this->xAxis, this->yAxis);
+}
+
+int Branch::getLevel() {
+	return this->level;
 }
