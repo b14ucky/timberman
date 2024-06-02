@@ -1,10 +1,9 @@
 #include "GameState.h"
-#include <vector>
 
 void GameState::initBackground() {
     this->backgroundTexture.loadFromFile("./assets/textures/background.png");
     this->backgroundSprite.setTexture(backgroundTexture);
-    this->backgroundSprite.setScale(1.25, 1.02);
+    this->backgroundSprite.setScale(1, 0.83);
 }
 
 void GameState::initBranches() {
@@ -12,13 +11,25 @@ void GameState::initBranches() {
     for (int i = 0; i < quantityOfBranches; i++)
     {
         int level = i + 1;
-        int yAxis = 770 - level * 125; // equation, that calculate location (yAxis) of branch
-        Branches.push_back(Branch("./assets/textures/branch.png", level, yAxis));
+        this->branches.push_back(Branch("./assets/textures/branch.png", level));
     }
+}
+
+void GameState::updateBranches()
+{
+    this->branches.pop_front();
+    for (auto& branch : branches) {
+        int currentLevel = branch.getLevel();
+        branch.setLevel(currentLevel - 1);
+
+    }
+    int level = this->quantityOfBranches;
+    this->branches.push_back(Branch("./assets/textures/branch.png", level));
 }
 
 void GameState::initVariable() {
     quantityOfBranches = 6;
+    this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
 }
 
 GameState::GameState() {}
@@ -44,15 +55,20 @@ void GameState::update()
 void GameState::render()
 {
     this->window->draw(this->backgroundSprite);
-    sf::Vector2f position(0, 600);
-    Lumberjack lumberjack("./assets/textures/lumberjack.png", position);
-    lumberjack.setScale(0.25, 0.25);
-    lumberjack.render(this->window);
+    
 
-    for (int i = 0; i < quantityOfBranches; i++)
+    for (auto &branch : this->branches)
     {
-        Branches[i].render(this->window);
+        branch.render(this->window);
     }
+    this->lumberjack.render(this->window);
+
+    // this draws a red line in the middle to help with positioning
+    sf::RectangleShape rect(sf::Vector2f(1, 800));
+    rect.setFillColor(sf::Color::Red);
+    rect.setPosition(this->window->getSize().x / 2 - rect.getSize().x / 2, 0);
+    this->window->draw(rect);
+    ///
 }
 
 void GameState::handleEvent(sf::Event event)
@@ -61,11 +77,13 @@ void GameState::handleEvent(sf::Event event)
     {
         if (event.key.scancode == sf::Keyboard::Scan::Left)
         {
-            std::cout << "lewy" << std::endl; /*implement player movement here*/
+            this->updateBranches();
+            this->lumberjack.moveLeft();
         }
         if (event.key.scancode == sf::Keyboard::Scan::Right)
         {
-            std::cout << "prawy" << std::endl; /*implement player movement here*/
+            this->updateBranches();
+            this->lumberjack.moveRight();
         }
     }
 }

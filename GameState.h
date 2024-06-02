@@ -6,19 +6,25 @@
 #include "Branch.h"
 
 #include <iostream> /*for testing only*/
-#include <vector>
+#include <deque>
 
 class GameState : public State
 {
 private:
     sf::Font font;
+
     sf::Texture backgroundTexture;
     sf::Sprite backgroundSprite;
-    void initBackground();
-    void initBranches();
-    std::vector<Branch> Branches;
+
+    std::deque<Branch> branches;
     int quantityOfBranches;
+
+    Lumberjack lumberjack;
+
+    void initBackground();
     void initVariable();
+    void initBranches();
+    void updateBranches();
 
 public:
     GameState();

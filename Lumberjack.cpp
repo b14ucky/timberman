@@ -5,12 +5,14 @@ Lumberjack::Lumberjack()
     /*Lumberjack class default constructor*/
 }
 
-Lumberjack::Lumberjack(std::string texturePath, sf::Vector2f position)
+Lumberjack::Lumberjack(std::string texturePath)
 {
     /*Lumberjack class parameterized constructor*/
-    this->texture.loadFromFile(texturePath);
-    this->setPosition(position);
-    this->setTexture(this->texture);
+    this->texture = new sf::Texture;
+    this->texture->loadFromFile(texturePath);
+    this->setTexture(*this->texture);
+    this->setScale(0.23, 0.23);
+    this->initPositions();
 }
 
 sf::Vector2f Lumberjack::getSize()
@@ -19,14 +21,25 @@ sf::Vector2f Lumberjack::getSize()
     return this->getGlobalBounds().getSize();
 }
 
+void Lumberjack::initPositions()
+{
+    this->positionLeft = sf::Vector2f(50, 550);
+    this->positionRight = sf::Vector2f(510, 550);
+    this->setPosition(positionLeft);
+}
+
 void Lumberjack::moveLeft()
 {
-    // TODO
+    this->setScale(0.23, 0.23);
+    this->setPosition(positionLeft);
 }
 
 void Lumberjack::moveRight()
 {
-    // TODO
+   
+    this->setScale(-0.23, 0.23);
+    this->setPosition(positionRight);
+    
 }
 
 void Lumberjack::render(sf::RenderWindow* window) {
