@@ -32,6 +32,20 @@ void GameState::initVariable() {
     this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
 }
 
+bool GameState::checkCollision() {
+    /*
+        Check if player collided with the next branch
+        Retrun: true if collided and false otherwise
+    */
+    Side lumberjackSide = this->lumberjack.getSide();
+    Side nextBranchSide = this->branches[1].getSide();
+
+    if (lumberjackSide == nextBranchSide) {
+        std::cout << "collision" << std::endl;
+        return true;
+    }
+}
+
 GameState::GameState() {}
 
 GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
@@ -77,13 +91,15 @@ void GameState::handleEvent(sf::Event event)
     {
         if (event.key.scancode == sf::Keyboard::Scan::Left)
         {
-            this->updateBranches();
             this->lumberjack.moveLeft();
+            this->checkCollision();
+            this->updateBranches();
         }
         if (event.key.scancode == sf::Keyboard::Scan::Right)
         {
-            this->updateBranches();
             this->lumberjack.moveRight();
+            this->checkCollision();
+            this->updateBranches();
         }
     }
 }
