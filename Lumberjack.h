@@ -2,10 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Side.h"
+
 class Lumberjack : public sf::Sprite
 {
 private:
     sf::Texture *texture;
+    Side side;
     sf::Vector2f positionLeft;
     sf::Vector2f positionRight;
     void initPositions();
