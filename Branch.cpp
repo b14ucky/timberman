@@ -28,10 +28,46 @@ Branch::Branch(std::string texturePath, int level)
 	this->setLevel(level);
 }
 
+Branch::Branch(const Branch& other) {
+	/*
+		Branch class copy constructor
+	*/
+	this->texture = new sf::Texture(*other.texture);
+	this->setTexture(*this->texture);
+	this->level = other.level;
+	this->side = other.side;
+	this->xAxis = other.xAxis;
+	this->yAxis = other.yAxis;
+	this->setPosition(other.getPosition());
+	this->setScale(other.getScale());
+}
+
+Branch& Branch::operator=(const Branch& other) {
+	if (this == &other) {
+		return *this;
+	}
+
+	delete this->texture;
+	this->texture = new sf::Texture(*other.texture);
+	this->setTexture(*this->texture);
+	this->level = other.level;
+	this->side = other.side;
+	this->xAxis = other.xAxis;
+	this->yAxis = other.yAxis;
+	this->setPosition(other.getPosition());
+	this->setScale(other.getScale());
+
+	return *this;
+}
+
+Branch::~Branch()
+{
+	delete this->texture;
+}
+
 bool Branch::randomizeSide() {
 	bool side;
 	side = rand() % 2;
-	std::cout << side;
 	return side;
 }
 

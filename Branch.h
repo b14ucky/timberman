@@ -17,6 +17,11 @@ private:
 public:
 	Branch();
 	Branch(std::string texturePath, int level);
+	// rule of three
+	Branch(const Branch& other);
+	virtual ~Branch();
+	Branch& operator=(const Branch& other);
+	//
 	bool randomizeSide();
 	void render(sf::RenderWindow* window);
 	int getLevel();
