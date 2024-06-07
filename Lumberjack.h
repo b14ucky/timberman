@@ -20,4 +20,5 @@ public:
     void moveLeft();
     void moveRight();
     void render(sf::RenderWindow* window);
+    Side getSide();
 };

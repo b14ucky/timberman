@@ -81,6 +81,13 @@ void Branch::setLevel(int level)
 	this->setPosition(this->xAxis, this->yAxis);
 }
 
+// getters / setters
+
 int Branch::getLevel() {
 	return this->level;
+}
+
+Side Branch::getSide()
+{
+	return this->side;
 }

@@ -25,4 +25,5 @@ public:
 	void render(sf::RenderWindow* window);
 	int getLevel();
 	void setLevel(int level);
+	Side getSide();
 };

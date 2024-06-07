@@ -47,3 +47,8 @@ void Lumberjack::moveRight()
 void Lumberjack::render(sf::RenderWindow* window) {
     window->draw(*this);
 }
+
+Side Lumberjack::getSide()
+{
+    return this->side;
+}
