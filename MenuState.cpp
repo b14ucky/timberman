@@ -58,9 +58,11 @@ void MenuState::initText() {
         Initializes MenuState text
     */
     this->gameNameText.setString("Timberman");
-    this->gameNameText.setCharacterSize(70);
+    this->gameNameText.setCharacterSize(80);
     this->gameNameText.setFont(this->font);
-    this->gameNameText.setFillColor(sf::Color::Black);
+    this->gameNameText.setFillColor(sf::Color(238, 132, 52));
+    this->gameNameText.setOutlineThickness(3);
+    this->gameNameText.setOutlineColor(sf::Color(19, 9, 2));
 
     // set text's origin to be its center so it's easier to position
     sf::Vector2f textBounds = this->gameNameText.getGlobalBounds().getSize();
