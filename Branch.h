@@ -1,16 +1,15 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <vector>
-#include <cstdlib>
-#include <cstdio>
 #include <ctime>
+
+#include "Side.h"
 
 class Branch : public sf::Sprite
 {
 private:
 	sf::Texture *texture;
-	bool side; // left - 1, right - 0
+	Side side;
 	int level; // 1-5
 	int xAxis; // left < right
 	int yAxis; // 1 < 2 < ... < 5
@@ -22,8 +21,9 @@ public:
 	virtual ~Branch();
 	Branch& operator=(const Branch& other);
 	//
-	bool randomizeSide();
+	Side randomizeSide();
 	void render(sf::RenderWindow* window);
 	int getLevel();
 	void setLevel(int level);
+	Side getSide();
 };

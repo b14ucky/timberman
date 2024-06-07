@@ -14,12 +14,12 @@ Branch::Branch(std::string texturePath, int level)
 	this->setTexture(*this->texture);
 
 	// make sure that first branch doesn't collide with lumberjack otherwise player would lose instantly
-	this->side = level == 1 ? 0 : randomizeSide(); 
+	this->side = level == 1 ? Side::right : randomizeSide();
 	
-	if (this->side == 0) { // 0 = right
+	if (this->side == Side::right) {
 		this->xAxis = 215;
 	}
-	else // 1 = left
+	else if(this->side == Side::left)
 	{
 		this->xAxis = 345; // CHECK IF LOOKS GOOD
 		this->setScale(-1, 1);
@@ -65,10 +65,8 @@ Branch::~Branch()
 	delete this->texture;
 }
 
-bool Branch::randomizeSide() {
-	bool side;
-	side = rand() % 2;
-	return side;
+Side Branch::randomizeSide() {
+	return rand() % 2 == 0 ? Side::left : Side::right;
 }
 
 void Branch::render(sf::RenderWindow* window) {
@@ -83,6 +81,13 @@ void Branch::setLevel(int level)
 	this->setPosition(this->xAxis, this->yAxis);
 }
 
+// getters / setters
+
 int Branch::getLevel() {
 	return this->level;
+}
+
+Side Branch::getSide()
+{
+	return this->side;
 }

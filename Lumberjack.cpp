@@ -13,6 +13,7 @@ Lumberjack::Lumberjack(std::string texturePath)
     this->setTexture(*this->texture);
     this->setScale(0.23, 0.23);
     this->initPositions();
+    this->side = Side::left;
 }
 
 sf::Vector2f Lumberjack::getSize()
@@ -30,13 +31,14 @@ void Lumberjack::initPositions()
 
 void Lumberjack::moveLeft()
 {
+    this->side = Side::left;
     this->setScale(0.23, 0.23);
     this->setPosition(positionLeft);
 }
 
 void Lumberjack::moveRight()
 {
-   
+    this->side = Side::right;
     this->setScale(-0.23, 0.23);
     this->setPosition(positionRight);
     
@@ -44,4 +46,9 @@ void Lumberjack::moveRight()
 
 void Lumberjack::render(sf::RenderWindow* window) {
     window->draw(*this);
+}
+
+Side Lumberjack::getSide()
+{
+    return this->side;
 }

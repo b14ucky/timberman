@@ -4,6 +4,7 @@
 #include "StateManager.h"
 #include "Lumberjack.h"
 #include "Branch.h"
+#include "Side.h"
 
 #include <iostream> /*for testing only*/
 #include <deque>
@@ -25,6 +26,8 @@ private:
     void initVariable();
     void initBranches();
     void updateBranches();
+
+    bool checkCollision();
 
 public:
     GameState();
