@@ -55,11 +55,11 @@ void MenuState::initButtons()
     /*
         Initializes MenuState buttons
     */
-    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 350)));
-    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 410)));
-    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 470)));
-    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 530)));
-    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 590)));
+    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 350)));
+    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 410)));
+    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 470)));
+    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 530)));
+    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 590)));
 }
 
 void MenuState::initText() {
