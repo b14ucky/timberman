@@ -34,6 +34,15 @@ void MenuState::updateMainMenuContent() {
     }
 }
 
+void MenuState::initBackground() {
+    /*
+        Loads the background texture and sets its position
+    */
+    this->backgroundTexture.loadFromFile("./assets/textures/menuBackground.png");
+    this->backgroundSprite.setTexture(this->backgroundTexture);
+    this->backgroundSprite.setPosition(-50, -150);
+}
+
 void MenuState::initVariables() {
     /*
         Initializes MenuState variables
@@ -78,6 +87,7 @@ MenuState::MenuState(sf::RenderWindow* window, StateManager* stateManager, sf::F
 {
 	this->font = font;
 
+    this->initBackground();
     this->initVariables();
     this->initButtons();
     this->initText();
@@ -119,6 +129,7 @@ void MenuState::render()
     /*
         Renders all objects
     */
+    this->window->draw(this->backgroundSprite);
     this->renderMainMenuContent();
 }
 

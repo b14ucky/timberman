@@ -11,6 +11,10 @@ class MenuState : public State {
 private:
 	sf::Font font;
 
+	// background
+	sf::Texture backgroundTexture;
+	sf::Sprite backgroundSprite;
+
 	// mouse variables
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
@@ -28,6 +32,7 @@ private:
 	void updateMainMenuContent();
 
 	// init methods
+	void initBackground();
 	void initVariables();
 	void initButtons();
 	void initText();
