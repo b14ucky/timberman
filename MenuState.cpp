@@ -34,6 +34,15 @@ void MenuState::updateMainMenuContent() {
     }
 }
 
+void MenuState::initBackground() {
+    /*
+        Loads the background texture and sets its position
+    */
+    this->backgroundTexture.loadFromFile("./assets/textures/menuBackground.png");
+    this->backgroundSprite.setTexture(this->backgroundTexture);
+    this->backgroundSprite.setPosition(-50, -150);
+}
+
 void MenuState::initVariables() {
     /*
         Initializes MenuState variables
@@ -46,11 +55,11 @@ void MenuState::initButtons()
     /*
         Initializes MenuState buttons
     */
-    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 350)));
-    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 410)));
-    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 470)));
-    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 530)));
-    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color::Black, sf::Vector2f(this->window->getSize().x / 2, 590)));
+    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 350)));
+    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 410)));
+    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 470)));
+    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 530)));
+    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 590)));
 }
 
 void MenuState::initText() {
@@ -58,9 +67,11 @@ void MenuState::initText() {
         Initializes MenuState text
     */
     this->gameNameText.setString("Timberman");
-    this->gameNameText.setCharacterSize(70);
+    this->gameNameText.setCharacterSize(80);
     this->gameNameText.setFont(this->font);
-    this->gameNameText.setFillColor(sf::Color::Black);
+    this->gameNameText.setFillColor(sf::Color(238, 132, 52));
+    this->gameNameText.setOutlineThickness(3);
+    this->gameNameText.setOutlineColor(sf::Color(19, 9, 2));
 
     // set text's origin to be its center so it's easier to position
     sf::Vector2f textBounds = this->gameNameText.getGlobalBounds().getSize();
@@ -76,6 +87,7 @@ MenuState::MenuState(sf::RenderWindow* window, StateManager* stateManager, sf::F
 {
 	this->font = font;
 
+    this->initBackground();
     this->initVariables();
     this->initButtons();
     this->initText();
@@ -117,6 +129,7 @@ void MenuState::render()
     /*
         Renders all objects
     */
+    this->window->draw(this->backgroundSprite);
     this->renderMainMenuContent();
 }
 
