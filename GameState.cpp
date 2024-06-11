@@ -30,6 +30,9 @@ void GameState::updateBranches()
 void GameState::initVariable() {
     this->quantityOfBranches = 6;
     this->score = 0;
+    this->timerSizeDecay = 1;
+    this->deltaTime = sf::seconds(0.1f);
+    this->previousUpdateScore = 0;
     this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
 }
 
@@ -41,6 +44,15 @@ void GameState::initText() {
     this->scoreText.setOutlineThickness(2);
     float screenMiddle = this->window->getSize().x / 2.f;
     this->scoreText.setPosition(screenMiddle - this->scoreText.getGlobalBounds().width / 2, 10);
+}
+
+void GameState::initTimer()
+{
+    sf::Vector2f timerSize(120, 20);
+    this->timer.setSize(timerSize);
+    float screenMiddle = this->window->getSize().x / 2.f;
+    this->timer.setPosition(screenMiddle - this->timer.getSize().x / 2, 0);
+    this->timer.setFillColor(sf::Color::Red);
 }
 
 bool GameState::checkCollision() {
@@ -68,6 +80,34 @@ void GameState::updateText()
     this->scoreText.setPosition(screenMiddle - this->scoreText.getGlobalBounds().width / 2, 10);
 }
 
+void GameState::updateTimer()
+{
+    this->elapsedTime += this->clock.restart();
+    if (this->elapsedTime >= this->deltaTime) {
+        sf::Vector2f newTimerSize = this->timer.getSize();
+        // update timer width
+        newTimerSize.x -= this->timerSizeDecay;
+        this->timer.setSize(newTimerSize);
+
+        this->elapsedTime = sf::seconds(0);
+    }
+}
+
+void GameState::resetTimer()
+{
+    sf::Vector2f newTimerSize = this->timer.getSize();
+    newTimerSize.x = 120;
+    this->timer.setSize(newTimerSize);
+}
+
+void GameState::updateTimerSizeDecay()
+{
+    if (this->score % 10 == 0 && this->score != 0 && this->previousUpdateScore != this->score) {
+        this->previousUpdateScore = this->score;
+        this->timerSizeDecay += 0.75;
+    }
+}
+
 GameState::GameState() {}
 
 GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
@@ -77,6 +117,7 @@ GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::F
     this->initVariable();
     this->initBranches();
     this->initText();
+    this->initTimer();
 }
 
 void GameState::handleInput()
@@ -87,6 +128,8 @@ void GameState::handleInput()
 void GameState::update()
 {
     this->updateText();
+    this->updateTimer();
+    this->updateTimerSizeDecay();
 }
 
 void GameState::render()
@@ -100,6 +143,7 @@ void GameState::render()
     }
     this->lumberjack.render(this->window);
 
+    this->window->draw(this->timer);
     this->window->draw(this->scoreText);
 
     // this draws a red line in the middle to help with positioning
@@ -121,6 +165,7 @@ void GameState::handleEvent(sf::Event event)
                 ++this->score;
             }
             this->updateBranches();
+            this->resetTimer();
         }
         if (event.key.scancode == sf::Keyboard::Scan::Right)
         {
@@ -129,6 +174,7 @@ void GameState::handleEvent(sf::Event event)
                 ++this->score;
             }
             this->updateBranches();
+            this->resetTimer();
         }
     }
 }

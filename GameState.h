@@ -26,14 +26,26 @@ private:
     int score;
     sf::Text scoreText;
 
+    sf::Clock clock;
+    sf::Time elapsedTime;
+    sf::Time deltaTime;
+    float timerSizeDecay;
+    sf::RectangleShape timer;
+
+    int previousUpdateScore;
+
     void initBackground();
     void initVariable();
     void initBranches();
     void updateBranches();
     void initText();
+    void initTimer();
 
     bool checkCollision();
     void updateText();
+    void updateTimer();
+    void resetTimer();
+    void updateTimerSizeDecay();
 
 public:
     GameState();
