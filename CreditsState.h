@@ -16,7 +16,8 @@ private:
     sf::Vector2f mousePosView;
     bool mouseHeld;
     std::vector<Button> creditsButton;
-    sf::Text creditsText;
+    sf::Text authorText;
+    sf::Text authorsNamesText;
 
     void initBackground();
     void initVariables();
