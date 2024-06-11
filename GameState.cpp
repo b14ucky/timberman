@@ -56,6 +56,20 @@ void GameState::initTimer()
     this->timer.setFillColor(sf::Color::Red);
 }
 
+void GameState::initEndGameMenu()
+{
+    sf::Vector2f endGameMenuSize(250, 250);
+    this->endGameMenuBackground.setSize(endGameMenuSize);
+    this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 224));
+    float screenHeightMiddle = this->window->getSize().y / 2.f - this->endGameMenuBackground.getSize().x / 2.f;
+    float screenWidthMiddle = this->window->getSize().x / 2.f - this->endGameMenuBackground.getSize().y / 2.f;
+    this->endGameMenuBackground.setPosition(screenWidthMiddle, screenHeightMiddle);
+
+    float screenMiddle = this->window->getSize().x / 2.f;
+    this->endGameMenuButtons.push_back(Button("Play again", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 350)));
+    this->endGameMenuButtons.push_back(Button("Main menu", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 450)));
+}
+
 bool GameState::checkCollision() {
     /*
         Check if player collided with the next branch
@@ -103,7 +117,7 @@ void GameState::resetTimer()
 
 void GameState::updateTimerSizeDecay()
 {
-    if (this->score % 10 == 0 && this->score != 0 && this->previousUpdateScore != this->score) {
+    if (this->score % 100 == 0 && this->score != 0 && this->previousUpdateScore != this->score) {
         this->previousUpdateScore = this->score;
         this->timerSizeDecay += 0.75;
     }
@@ -117,6 +131,24 @@ void GameState::checkTimeOver()
     }
 }
 
+void GameState::renderEndGameMenu()
+{
+    this->window->draw(this->endGameMenuBackground);
+
+    for (auto& button : endGameMenuButtons) {
+        button.render(this->window);
+    }
+}
+
+void GameState::updateMousePositions()
+{
+    /*
+        Update the mouse positions
+    */
+    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
+    this->mousePosView = this->window->mapPixelToCoords(mousePosWindow);
+}
+
 GameState::GameState() {}
 
 GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
@@ -127,15 +159,31 @@ GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::F
     this->initBranches();
     this->initText();
     this->initTimer();
+    this->initEndGameMenu();
 }
 
 void GameState::handleInput()
 {
-    /*IMPLEMENT THIS*/
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (!this->mouseHeld) {
+            this->mouseHeld = true;
+
+            if (this->endGameMenuButtons[0].getGlobalBounds().contains(this->mousePosView)) {
+                this->stateManager->setState(std::make_unique<GameState>(this->window, this->stateManager, this->font));
+            }
+            else if (this->endGameMenuButtons[1].getGlobalBounds().contains(this->mousePosView)) {
+                this->stateManager->setState(std::make_unique<MenuState>(this->window, this->stateManager, this->font));
+            }
+        }
+    }
+    else {
+        this->mouseHeld = false;
+    }
 }
 
 void GameState::update()
 {
+    this->updateMousePositions();
     if (!isGameOver) {
         this->updateText();
         this->updateTimer();
@@ -147,7 +195,6 @@ void GameState::update()
 void GameState::render()
 {
     this->window->draw(this->backgroundSprite);
-    
 
     for (auto &branch : this->branches)
     {
@@ -157,6 +204,10 @@ void GameState::render()
 
     this->window->draw(this->timer);
     this->window->draw(this->scoreText);
+
+    if (isGameOver) {
+        this->renderEndGameMenu();
+    }
 
     // this draws a red line in the middle to help with positioning
     sf::RectangleShape rect(sf::Vector2f(1, 800));
