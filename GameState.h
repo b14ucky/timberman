@@ -34,6 +34,8 @@ private:
 
     int previousUpdateScore;
 
+    bool isGameOver;
+
     void initBackground();
     void initVariable();
     void initBranches();
@@ -46,6 +48,7 @@ private:
     void updateTimer();
     void resetTimer();
     void updateTimerSizeDecay();
+    void checkTimeOver();
 
 public:
     GameState();

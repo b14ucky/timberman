@@ -33,6 +33,7 @@ void GameState::initVariable() {
     this->timerSizeDecay = 1;
     this->deltaTime = sf::seconds(0.1f);
     this->previousUpdateScore = 0;
+    this->isGameOver = false;
     this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
 }
 
@@ -108,6 +109,14 @@ void GameState::updateTimerSizeDecay()
     }
 }
 
+void GameState::checkTimeOver()
+{
+    float timeLeft = this->timer.getSize().x;
+    if (timeLeft <= 0) {
+        this->isGameOver = true;
+    }
+}
+
 GameState::GameState() {}
 
 GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
@@ -127,9 +136,12 @@ void GameState::handleInput()
 
 void GameState::update()
 {
-    this->updateText();
-    this->updateTimer();
-    this->updateTimerSizeDecay();
+    if (!isGameOver) {
+        this->updateText();
+        this->updateTimer();
+        this->updateTimerSizeDecay();
+        this->checkTimeOver();
+    }
 }
 
 void GameState::render()
@@ -158,23 +170,31 @@ void GameState::handleEvent(sf::Event event)
 {
     if (event.type == sf::Event::KeyPressed)
     {
-        if (event.key.scancode == sf::Keyboard::Scan::Left)
-        {
-            this->lumberjack.moveLeft();
-            if (!this->checkCollision()) {
-                ++this->score;
+        if (!isGameOver) {
+            if (event.key.scancode == sf::Keyboard::Scan::Left)
+            {
+                this->lumberjack.moveLeft();
+                if (!this->checkCollision()) {
+                    ++this->score;
+                }
+                else {
+                    this->isGameOver = true;
+                }
+                this->updateBranches();
+                this->resetTimer();
             }
-            this->updateBranches();
-            this->resetTimer();
-        }
-        if (event.key.scancode == sf::Keyboard::Scan::Right)
-        {
-            this->lumberjack.moveRight();
-            if (!this->checkCollision()) {
-                ++this->score;
+            if (event.key.scancode == sf::Keyboard::Scan::Right)
+            {
+                this->lumberjack.moveRight();
+                if (!this->checkCollision()) {
+                    ++this->score;
+                }
+                else {
+                    this->isGameOver = true;
+                }
+                this->updateBranches();
+                this->resetTimer();
             }
-            this->updateBranches();
-            this->resetTimer();
         }
     }
 }
