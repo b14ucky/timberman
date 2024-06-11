@@ -3,7 +3,8 @@
 #include "State.h"
 #include "Button.h"
 #include "GameState.h"
-#include "CreditsState.h"	
+#include "CreditsState.h"
+#include "HowToPlayyState.h"
 #include <iostream>
 #include <vector>
 

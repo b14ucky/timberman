@@ -5,9 +5,13 @@
 #include "Lumberjack.h"
 #include "Branch.h"
 #include "Side.h"
+#include "Button.h"
+#include "MenuState.h"
 
 #include <iostream> /*for testing only*/
 #include <deque>
+#include <vector>
+#include <sstream>
 
 class GameState : public State
 {
@@ -22,12 +26,42 @@ private:
 
     Lumberjack lumberjack;
 
+    int score;
+    sf::Text scoreText;
+
+    sf::Clock clock;
+    sf::Time elapsedTime;
+    sf::Time deltaTime;
+    float timerSizeDecay;
+    sf::RectangleShape timer;
+
+    int previousUpdateScore;
+
+    bool isGameOver;
+
+    sf::RectangleShape endGameMenuBackground;
+    std::vector<Button> endGameMenuButtons;
+
+    sf::Vector2i mousePosWindow;
+    sf::Vector2f mousePosView;
+    bool mouseHeld;
+
     void initBackground();
     void initVariable();
     void initBranches();
     void updateBranches();
+    void initText();
+    void initTimer();
+    void initEndGameMenu();
 
     bool checkCollision();
+    void updateText();
+    void updateTimer();
+    void resetTimer();
+    void updateTimerSizeDecay();
+    void checkTimeOver();
+    void renderEndGameMenu();
+    void updateMousePositions();
 
 public:
     GameState();
