@@ -28,8 +28,19 @@ void GameState::updateBranches()
 }
 
 void GameState::initVariable() {
-    quantityOfBranches = 6;
+    this->quantityOfBranches = 6;
+    this->score = 0;
     this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
+}
+
+void GameState::initText() {
+    this->scoreText.setString("0");
+    this->scoreText.setFont(this->font);
+    this->scoreText.setCharacterSize(55);
+    this->scoreText.setOutlineColor(sf::Color::Black);
+    this->scoreText.setOutlineThickness(2);
+    float screenMiddle = this->window->getSize().x / 2.f;
+    this->scoreText.setPosition(screenMiddle - this->scoreText.getGlobalBounds().width / 2, 10);
 }
 
 bool GameState::checkCollision() {
@@ -44,6 +55,17 @@ bool GameState::checkCollision() {
         std::cout << "collision" << std::endl;
         return true;
     }
+    return false;
+}
+
+void GameState::updateText()
+{
+    std::stringstream scoreString;
+    scoreString << this->score;
+    this->scoreText.setString(scoreString.str());
+
+    float screenMiddle = this->window->getSize().x / 2.f;
+    this->scoreText.setPosition(screenMiddle - this->scoreText.getGlobalBounds().width / 2, 10);
 }
 
 GameState::GameState() {}
@@ -54,6 +76,7 @@ GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::F
     this->initBackground();
     this->initVariable();
     this->initBranches();
+    this->initText();
 }
 
 void GameState::handleInput()
@@ -63,7 +86,7 @@ void GameState::handleInput()
 
 void GameState::update()
 {
-    /*IMPLEMENT THIS*/
+    this->updateText();
 }
 
 void GameState::render()
@@ -76,6 +99,8 @@ void GameState::render()
         branch.render(this->window);
     }
     this->lumberjack.render(this->window);
+
+    this->window->draw(this->scoreText);
 
     // this draws a red line in the middle to help with positioning
     sf::RectangleShape rect(sf::Vector2f(1, 800));
@@ -92,13 +117,17 @@ void GameState::handleEvent(sf::Event event)
         if (event.key.scancode == sf::Keyboard::Scan::Left)
         {
             this->lumberjack.moveLeft();
-            this->checkCollision();
+            if (!this->checkCollision()) {
+                ++this->score;
+            }
             this->updateBranches();
         }
         if (event.key.scancode == sf::Keyboard::Scan::Right)
         {
             this->lumberjack.moveRight();
-            this->checkCollision();
+            if (!this->checkCollision()) {
+                ++this->score;
+            }
             this->updateBranches();
         }
     }

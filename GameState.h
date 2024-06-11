@@ -8,6 +8,7 @@
 
 #include <iostream> /*for testing only*/
 #include <deque>
+#include <sstream>
 
 class GameState : public State
 {
@@ -22,12 +23,17 @@ private:
 
     Lumberjack lumberjack;
 
+    int score;
+    sf::Text scoreText;
+
     void initBackground();
     void initVariable();
     void initBranches();
     void updateBranches();
+    void initText();
 
     bool checkCollision();
+    void updateText();
 
 public:
     GameState();
