@@ -6,7 +6,7 @@
 #include "MenuState.h"
 
 
-class CreditsState : public State
+class HowToPlayyState : public State
 {
 private:
     sf::Font font;
@@ -28,8 +28,8 @@ private:
     void updateCreditsContent();
 
 public:
-    CreditsState();
-    CreditsState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font);
+    HowToPlayyState();
+    HowToPlayyState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font);
     void handleInput() override;
     void update() override;
     void render() override;

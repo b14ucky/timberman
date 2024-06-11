@@ -105,6 +105,9 @@ void MenuState::handleInput()
             if (this->mainMenuButtons[0].getGlobalBounds().contains(this->mousePosView)) {
                 this->stateManager->setState(std::make_unique<GameState>(this->window, this->stateManager, this->font));
             }
+            else if (this->mainMenuButtons[2].getGlobalBounds().contains(this->mousePosView)) {
+                this->stateManager->setState(std::make_unique<HowToPlayyState>(this->window, this->stateManager, this->font));
+            }
             else if (this->mainMenuButtons[3].getGlobalBounds().contains(this->mousePosView)) {
                 this->stateManager->setState(std::make_unique<CreditsState>(this->window, this->stateManager, this->font));
             }
