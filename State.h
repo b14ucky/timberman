@@ -13,6 +13,7 @@ public:
     StateManager *stateManager;
     State();
     State(sf::RenderWindow *window, StateManager *stateManager);
+    virtual ~State() = default;
     virtual void handleInput() = 0;
     virtual void update() = 0;
     virtual void render() = 0;
