@@ -3,7 +3,7 @@
 void GameState::initBackground() {
     this->backgroundTexture.loadFromFile("./assets/textures/background.png");
     this->backgroundSprite.setTexture(backgroundTexture);
-    this->backgroundSprite.setScale(1, 0.83);
+    this->backgroundSprite.setScale(1.f, 0.83f);
 }
 
 void GameState::initBranches() {
