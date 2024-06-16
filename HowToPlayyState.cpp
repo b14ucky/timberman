@@ -27,7 +27,7 @@ void HowToPlayyState::initVariables()
 }
 void HowToPlayyState::initButtons()
 {
-    this->creditsButton.push_back(Button("BACK", this->font, 45, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 580)));
+    this->creditsButton.push_back(Button("BACK", this->font, 45, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 555)));
 }
 void HowToPlayyState::initText()
 {
