@@ -27,7 +27,7 @@ void HowToPlayyState::initVariables()
 }
 void HowToPlayyState::initButtons()
 {
-    this->creditsButton.push_back(Button("BACK", this->font, 45, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 580)));
+    this->creditsButton.push_back(Button("BACK", this->font, 45, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 580)));
 }
 void HowToPlayyState::initText()
 {
@@ -45,10 +45,10 @@ void HowToPlayyState::initText()
     this->instruction.setOutlineThickness(1);
     sf::Vector2f textBounds = this->title.getGlobalBounds().getSize();
     this->title.setOrigin(textBounds.x / 2, textBounds.y / 2);
-    this->title.setPosition(sf::Vector2f(this->window->getSize().x / 2, 35));
+    this->title.setPosition(sf::Vector2f(this->window->getSize().x / 2.f, 35));
     sf::Vector2f textBounds2 = this->instruction.getGlobalBounds().getSize();
     this->instruction.setOrigin(textBounds2.x / 2, textBounds2.y / 2);
-    this->instruction.setPosition(sf::Vector2f(this->window->getSize().x / 2, 250));
+    this->instruction.setPosition(sf::Vector2f(this->window->getSize().x / 2.f, 250));
 }
 void HowToPlayyState::renderCreditsContent()
 {
@@ -69,7 +69,7 @@ void HowToPlayyState::updateCreditsContent()
 {
     for (auto& button : creditsButton) {
         if (button.getGlobalBounds().contains(this->mousePosView)) {
-            button.setScale(1.15, 1.15);
+            button.setScale(1.15f, 1.15f);
         }
         else {
             button.setScale(1, 1);
