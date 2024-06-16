@@ -60,7 +60,7 @@ void GameState::initEndGameMenu()
 {
     sf::Vector2f endGameMenuSize(400, 400);
     this->endGameMenuBackground.setSize(endGameMenuSize);
-    this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 224));
+    this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 229));
     float screenHeightMiddle = this->window->getSize().y / 2.f - this->endGameMenuBackground.getSize().x / 2.f;
     float screenWidthMiddle = this->window->getSize().x / 2.f - this->endGameMenuBackground.getSize().y / 2.f;
     this->endGameMenuBackground.setPosition(screenWidthMiddle, screenHeightMiddle);
@@ -314,10 +314,10 @@ void GameState::render()
     }
 
     // this draws a red line in the middle to help with positioning
-    sf::RectangleShape rect(sf::Vector2f(1, 800));
+    /*sf::RectangleShape rect(sf::Vector2f(1, 800));
     rect.setFillColor(sf::Color::Red);
     rect.setPosition(this->window->getSize().x / 2 - rect.getSize().x / 2, 0);
-    this->window->draw(rect);
+    this->window->draw(rect);*/
     ///
 }
 
