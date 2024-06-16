@@ -60,14 +60,14 @@ void GameState::initEndGameMenu()
 {
     sf::Vector2f endGameMenuSize(250, 250);
     this->endGameMenuBackground.setSize(endGameMenuSize);
-    this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 224));
+    this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 229));
     float screenHeightMiddle = this->window->getSize().y / 2.f - this->endGameMenuBackground.getSize().x / 2.f;
     float screenWidthMiddle = this->window->getSize().x / 2.f - this->endGameMenuBackground.getSize().y / 2.f;
     this->endGameMenuBackground.setPosition(screenWidthMiddle, screenHeightMiddle);
 
     float screenMiddle = this->window->getSize().x / 2.f;
-    this->endGameMenuButtons.push_back(Button("Play again", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 350)));
-    this->endGameMenuButtons.push_back(Button("Main menu", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 450)));
+    this->endGameMenuButtons.push_back(Button("Play again", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 335)));
+    this->endGameMenuButtons.push_back(Button("Main menu", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 435)));
 }
 
 bool GameState::checkCollision() {
@@ -210,10 +210,10 @@ void GameState::render()
     }
 
     // this draws a red line in the middle to help with positioning
-    sf::RectangleShape rect(sf::Vector2f(1, 800));
+    /*sf::RectangleShape rect(sf::Vector2f(1, 800));
     rect.setFillColor(sf::Color::Red);
     rect.setPosition(this->window->getSize().x / 2 - rect.getSize().x / 2, 0);
-    this->window->draw(rect);
+    this->window->draw(rect);*/
     ///
 }
 
