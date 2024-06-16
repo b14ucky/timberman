@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "GameState.h"
 #include "CreditsState.h"
+#include "LeaderboardState.h"
 #include "HowToPlayyState.h"
 #include <iostream>
 #include <vector>
