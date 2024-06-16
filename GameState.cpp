@@ -31,7 +31,7 @@ void GameState::initVariable() {
     this->quantityOfBranches = 6;
     this->score = 0;
     this->timerSizeDecay = 1;
-    this->deltaTime = sf::seconds(0.1f);
+    this->deltaTime = sf::seconds(0.05f);
     this->previousUpdateScore = 0;
     this->isGameOver = false;
     this->lumberjack=Lumberjack("./assets/textures/lumberjack.png");
