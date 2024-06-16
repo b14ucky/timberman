@@ -26,7 +26,7 @@ void MenuState::updateMainMenuContent() {
     */
     for (auto& button : mainMenuButtons) {
         if (button.getGlobalBounds().contains(this->mousePosView)) {
-            button.setScale(1.15, 1.15);
+            button.setScale(1.15f, 1.15f);
         }
         else {
             button.setScale(1, 1);
@@ -55,11 +55,11 @@ void MenuState::initButtons()
     /*
         Initializes MenuState buttons
     */
-    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 350)));
-    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 410)));
-    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 470)));
-    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 530)));
-    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2, 590)));
+    this->mainMenuButtons.push_back(Button("PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 350)));
+    this->mainMenuButtons.push_back(Button("LEADERBOARD", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 410)));
+    this->mainMenuButtons.push_back(Button("HOW TO PLAY", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 470)));
+    this->mainMenuButtons.push_back(Button("CREDITS", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 530)));
+    this->mainMenuButtons.push_back(Button("EXIT", this->font, 40, sf::Color(244, 176, 123), 3, sf::Color(19, 9, 2), sf::Vector2f(this->window->getSize().x / 2.f, 590)));
 }
 
 void MenuState::initText() {
@@ -76,7 +76,7 @@ void MenuState::initText() {
     // set text's origin to be its center so it's easier to position
     sf::Vector2f textBounds = this->gameNameText.getGlobalBounds().getSize();
     this->gameNameText.setOrigin(textBounds.x / 2, textBounds.y / 2);
-    this->gameNameText.setPosition(sf::Vector2f(this->window->getSize().x / 2, 100));
+    this->gameNameText.setPosition(sf::Vector2f(this->window->getSize().x / 2.f, 100));
 }
 
 MenuState::MenuState()
