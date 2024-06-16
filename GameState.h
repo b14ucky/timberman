@@ -12,6 +12,8 @@
 #include <deque>
 #include <vector>
 #include <sstream>
+#include <fstream>
+#include <utility>
 
 class GameState : public State
 {
@@ -46,6 +48,10 @@ private:
     sf::Vector2f mousePosView;
     bool mouseHeld;
 
+    sf::String playerName;
+    sf::Text inputField;
+    sf::Text infoText;
+
     void initBackground();
     void initVariable();
     void initBranches();
@@ -62,6 +68,8 @@ private:
     void checkTimeOver();
     void renderEndGameMenu();
     void updateMousePositions();
+    void updateEndGameMenu();
+    void saveScore();
 
 public:
     GameState();
