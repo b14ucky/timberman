@@ -58,7 +58,7 @@ void GameState::initTimer()
 
 void GameState::initEndGameMenu()
 {
-    sf::Vector2f endGameMenuSize(250, 250);
+    sf::Vector2f endGameMenuSize(400, 400);
     this->endGameMenuBackground.setSize(endGameMenuSize);
     this->endGameMenuBackground.setFillColor(sf::Color(255, 255, 255, 224));
     float screenHeightMiddle = this->window->getSize().y / 2.f - this->endGameMenuBackground.getSize().x / 2.f;
@@ -66,8 +66,19 @@ void GameState::initEndGameMenu()
     this->endGameMenuBackground.setPosition(screenWidthMiddle, screenHeightMiddle);
 
     float screenMiddle = this->window->getSize().x / 2.f;
-    this->endGameMenuButtons.push_back(Button("Play again", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 350)));
-    this->endGameMenuButtons.push_back(Button("Main menu", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 450)));
+    this->endGameMenuButtons.push_back(Button("Play again", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 450)));
+    this->endGameMenuButtons.push_back(Button("Main menu", this->font, 40, sf::Color::Black, 0, sf::Color::Black, sf::Vector2f(screenMiddle, 500)));
+
+    this->infoText.setString("Enter your name: ");
+    this->infoText.setFont(this->font);
+    this->infoText.setFillColor(sf::Color::Black);
+    this->infoText.setCharacterSize(40);
+    this->infoText.setPosition(this->window->getSize().x / 2.f - this->infoText.getGlobalBounds().width / 2.f, 260);
+    this->inputField.setFillColor(sf::Color::Black);
+    this->inputField.setFont(this->font);
+    this->inputField.setCharacterSize(40);
+
+    this->inputField.setString("YOUR NAME");
 }
 
 bool GameState::checkCollision() {
@@ -134,6 +145,8 @@ void GameState::checkTimeOver()
 void GameState::renderEndGameMenu()
 {
     this->window->draw(this->endGameMenuBackground);
+    this->window->draw(this->infoText);
+    this->window->draw(this->inputField);
 
     for (auto& button : endGameMenuButtons) {
         button.render(this->window);
@@ -147,6 +160,92 @@ void GameState::updateMousePositions()
     */
     this->mousePosWindow = sf::Mouse::getPosition(*this->window);
     this->mousePosView = this->window->mapPixelToCoords(mousePosWindow);
+}
+
+void GameState::updateEndGameMenu()
+{
+    this->inputField.setPosition(this->window->getSize().x / 2.f - this->inputField.getGlobalBounds().width / 2.f, 310);
+    for (auto& button : endGameMenuButtons) {
+        if (button.getGlobalBounds().contains(this->mousePosView)) {
+            button.setScale(1.05f, 1.05f);
+        }
+        else {
+            button.setScale(1.f, 1.f);
+        }
+    }
+}
+
+void GameState::saveScore()
+{
+    if (this->playerName.getSize()) {
+        // open file
+        // if file length < 10 lines: append new score
+        // if file length == 10 lines:
+        //     if last score is greater than current score: leave as is
+        //     else: replace last score and sort
+        std::fstream leaderboardFile;
+        leaderboardFile.open("./assets/leader.txt", std::ios::in);
+
+        // read the contents of the file and store them as std::pair<score, name> inside of std::vector
+
+        std::string line;
+        std::vector<std::pair<int, std::string>> scores;
+
+        while (!leaderboardFile.eof()) {
+            getline(leaderboardFile, line);
+
+            std::string name;
+            std::string score;
+            bool separatorFound = false;
+
+            for (auto character : line) {
+                if (character == ':') {
+                    separatorFound = true;
+                    continue;
+                }
+                if (!separatorFound) {
+                    name += character;
+                }
+                else {
+                    score += character;
+                }
+            }
+
+            scores.push_back(std::make_pair(stoi(score), name));
+        }
+
+        leaderboardFile.close();
+
+        std::pair<int, std::string> currentScore(this->score, this->playerName);
+
+        // check the number of entries in the leaderboard
+        // if it is smaller than 10 push current score to the back and sort in descending order
+        // if it is greater than 10 replace the last element with current score and sort in desceding order
+
+        if (scores.size() < 10) {
+            scores.push_back(currentScore);
+            std::sort(scores.begin(), scores.end(), std::greater<std::pair<int, std::string>>());
+        }
+        else if (scores.size() == 10) {
+            std::pair<int, std::string> lowestScore = scores[scores.size() - 1];
+
+            if (currentScore > lowestScore) {
+                scores.pop_back();
+                scores.push_back(currentScore);
+                std::sort(scores.begin(), scores.end(), std::greater<std::pair<int, std::string>>());
+            }
+        }
+
+        // save the new leaderboard 
+        leaderboardFile.open("./assets/leader.txt", std::ios::out);
+
+        for (int i = 0; i < scores.size(); ++i) {
+            if (i != scores.size() - 1)
+                leaderboardFile << scores[i].second << ":" << scores[i].first << "\n";
+            else
+                leaderboardFile << scores[i].second << ":" << scores[i].first;
+        }
+    }
 }
 
 GameState::GameState() {}
@@ -169,9 +268,11 @@ void GameState::handleInput()
             this->mouseHeld = true;
 
             if (this->endGameMenuButtons[0].getGlobalBounds().contains(this->mousePosView)) {
+                this->saveScore();
                 this->stateManager->setState(std::make_unique<GameState>(this->window, this->stateManager, this->font));
             }
             else if (this->endGameMenuButtons[1].getGlobalBounds().contains(this->mousePosView)) {
+                this->saveScore();
                 this->stateManager->setState(std::make_unique<MenuState>(this->window, this->stateManager, this->font));
             }
         }
@@ -189,6 +290,9 @@ void GameState::update()
         this->updateTimer();
         this->updateTimerSizeDecay();
         this->checkTimeOver();
+    }
+    else {
+        this->updateEndGameMenu();
     }
 }
 
@@ -245,6 +349,17 @@ void GameState::handleEvent(sf::Event event)
                 }
                 this->updateBranches();
                 this->resetTimer();
+            }
+        }
+    } else if (event.type == sf::Event::TextEntered) {
+        if (this->isGameOver) {
+            if (event.text.unicode == '\b' && this->playerName.getSize() != 0) {
+                this->playerName.erase(this->playerName.getSize() - 1, 1);
+                this->inputField.setString(this->playerName);
+            }
+            else if (this->playerName.getSize() <= 15 && event.text.unicode > 31 && event.text.unicode < 127 && event.text.unicode != 58) {
+                this->playerName += event.text.unicode;
+                this->inputField.setString(this->playerName);
             }
         }
     }
