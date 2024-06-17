@@ -16,6 +16,9 @@ private:
 public:
     Lumberjack();
     Lumberjack(std::string texturePath);
+    Lumberjack(const Lumberjack& other);
+    virtual ~Lumberjack();
+    Lumberjack& operator=(const Lumberjack& other);
     sf::Vector2f getSize();
     void moveLeft();
     void moveRight();
