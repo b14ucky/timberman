@@ -33,7 +33,7 @@ void LeaderboardState::initButtons()
 void LeaderboardState::initText()
 {
     
-    this->title.setString("LEADERBOARDS:");
+    this->title.setString("LEADERBOARD:");
     std::string score{"\n"};
     std::string nick{};
     std::string points{};
@@ -45,13 +45,18 @@ void LeaderboardState::initText()
     file.open("assets/leader.txt", std::ios::in);
     if (file.good() == false)
     {
-        this->instruction.setString("File doesn't exist!");
+        this->instruction.setString("Leaderboard is empty!");
     }
     else
     {
-        while (!file.eof())
+        if (!getline(file, line)) {
+            this->instruction.setString("Leaderboard is empty!");
+        }
+        file.clear();
+        file.seekg(0, std::ios::beg);
+
+        while (getline(file, line))
         {
-            getline(file, line);
             check = false;
             nick="";
             points = "";
