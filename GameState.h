@@ -8,7 +8,7 @@
 #include "Button.h"
 #include "MenuState.h"
 
-#include <iostream> /*for testing only*/
+#include <iostream>
 #include <deque>
 #include <vector>
 #include <sstream>

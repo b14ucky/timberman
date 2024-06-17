@@ -11,8 +11,8 @@ private:
 	sf::Texture *texture;
 	Side side;
 	int level; // 1-5
-	int xAxis; // left < right
-	int yAxis; // 1 < 2 < ... < 5
+	int xAxis;
+	int yAxis;
 public:
 	Branch();
 	Branch(std::string texturePath, int level);

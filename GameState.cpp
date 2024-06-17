@@ -90,7 +90,6 @@ bool GameState::checkCollision() {
     Side nextBranchSide = this->branches[1].getSide();
 
     if (lumberjackSide == nextBranchSide) {
-        std::cout << "collision" << std::endl;
         return true;
     }
     return false;
@@ -122,7 +121,8 @@ void GameState::updateTimer()
 void GameState::resetTimer()
 {
     sf::Vector2f newTimerSize = this->timer.getSize();
-    newTimerSize.x = 120;
+    newTimerSize.x += 10;
+    if (newTimerSize.x > 120) newTimerSize.x = 120;
     this->timer.setSize(newTimerSize);
 }
 
@@ -317,13 +317,6 @@ void GameState::render()
     if (isGameOver) {
         this->renderEndGameMenu();
     }
-
-    // this draws a red line in the middle to help with positioning
-    /*sf::RectangleShape rect(sf::Vector2f(1, 800));
-    rect.setFillColor(sf::Color::Red);
-    rect.setPosition(this->window->getSize().x / 2 - rect.getSize().x / 2, 0);
-    this->window->draw(rect);*/
-    ///
 }
 
 void GameState::handleEvent(sf::Event event)
