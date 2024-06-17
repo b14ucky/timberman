@@ -16,6 +16,42 @@ Lumberjack::Lumberjack(std::string texturePath)
     this->side = Side::left;
 }
 
+Lumberjack::Lumberjack(const Lumberjack& other)
+{
+    /*
+        Lumberjack class copy constructor
+    */
+    this->texture = new sf::Texture(*other.texture);
+    this->setTexture(*this->texture);
+    this->side = other.side;
+    this->positionLeft = other.positionLeft;
+    this->positionRight = other.positionRight;
+    this->setPosition(other.getPosition());
+    this->setScale(other.getScale());
+}
+
+Lumberjack::~Lumberjack() {
+    delete this->texture;
+}
+
+Lumberjack& Lumberjack::operator=(const Lumberjack& other)
+{
+    if (this == &other) {
+        return *this;
+    }
+
+    delete this->texture;
+    this->texture = new sf::Texture(*other.texture);
+    this->setTexture(*this->texture);
+    this->side = other.side;
+    this->positionLeft = other.positionLeft;
+    this->positionRight = other.positionRight;
+    this->setPosition(other.getPosition());
+    this->setScale(other.getScale());
+
+    return *this;
+}
+
 sf::Vector2f Lumberjack::getSize()
 {
     /*Returns lumberjack size*/
