@@ -191,30 +191,33 @@ void GameState::saveScore()
         std::string line;
         std::vector<std::pair<int, std::string>> scores;
 
-        while (!leaderboardFile.eof()) {
-            getline(leaderboardFile, line);
+        if (leaderboardFile) {
+            while (getline(leaderboardFile, line)) {
+            
 
-            std::string name;
-            std::string score;
-            bool separatorFound = false;
+                std::string name;
+                std::string score;
+                bool separatorFound = false;
 
-            for (auto character : line) {
-                if (character == ':') {
-                    separatorFound = true;
-                    continue;
+                for (auto character : line) {
+                    if (character == ':') {
+                        separatorFound = true;
+                        continue;
+                    }
+                    if (!separatorFound) {
+                        name += character;
+                    }
+                    else {
+                        score += character;
+                    }
                 }
-                if (!separatorFound) {
-                    name += character;
-                }
-                else {
-                    score += character;
-                }
+
+                scores.push_back(std::make_pair(stoi(score), name));
             }
 
-            scores.push_back(std::make_pair(stoi(score), name));
+            leaderboardFile.close();
         }
 
-        leaderboardFile.close();
 
         std::pair<int, std::string> currentScore(this->score, this->playerName);
 
@@ -245,6 +248,8 @@ void GameState::saveScore()
             else
                 leaderboardFile << scores[i].second << ":" << scores[i].first;
         }
+
+        leaderboardFile.close();
     }
 }
 
