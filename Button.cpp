@@ -10,7 +10,7 @@ Button::Button(std::string text, sf::Font& font, unsigned int charSize, sf::Colo
     this->setFillColor(color);
     this->setOutlineThickness(outlineThickness);
     this->setOutlineColor(outlineColor);
-    this->setOrigin(this->getGlobalBounds().getSize().x / 2, this->getGlobalBounds().getSize().y);
+    this->setOrigin(this->getGlobalBounds().getSize().x / 2.f, this->getGlobalBounds().getSize().y);
     this->setPosition(position);
 }
 

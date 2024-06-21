@@ -4,6 +4,11 @@
 Branch::Branch()
 {
 	/*Branch class default constructor*/
+	this->texture = nullptr;
+	this->level = 1;
+	this->side = Side::right;
+	this->xAxis = 215;
+	this->yAxis = 532;
 }
 
 Branch::Branch(std::string texturePath, int level)
@@ -77,7 +82,7 @@ void Branch::setLevel(int level)
 {
 	this->level = level;
 	// equation, that calculates y position (yAxis) of branch
-	this->yAxis = 732 - this->level * 160;
+	this->yAxis = 732.f - this->level * 160.f;
 	this->setPosition(this->xAxis, this->yAxis);
 }
 

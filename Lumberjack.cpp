@@ -3,6 +3,8 @@
 Lumberjack::Lumberjack()
 {
     /*Lumberjack class default constructor*/
+    this->texture = nullptr;
+    this->side = Side::left;
 }
 
 Lumberjack::Lumberjack(std::string texturePath)
@@ -11,7 +13,7 @@ Lumberjack::Lumberjack(std::string texturePath)
     this->texture = new sf::Texture;
     this->texture->loadFromFile(texturePath);
     this->setTexture(*this->texture);
-    this->setScale(0.23, 0.23);
+    this->setScale(0.23f, 0.23f);
     this->initPositions();
     this->side = Side::left;
 }
@@ -68,14 +70,14 @@ void Lumberjack::initPositions()
 void Lumberjack::moveLeft()
 {
     this->side = Side::left;
-    this->setScale(0.23, 0.23);
+    this->setScale(0.23f, 0.23f);
     this->setPosition(positionLeft);
 }
 
 void Lumberjack::moveRight()
 {
     this->side = Side::right;
-    this->setScale(-0.23, 0.23);
+    this->setScale(-0.23f, 0.23f);
     this->setPosition(positionRight);
     
 }

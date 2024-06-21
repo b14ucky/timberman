@@ -3,6 +3,7 @@
 
 LeaderboardState::LeaderboardState()
 {
+    this->mouseHeld = false;
 }
 
 LeaderboardState::LeaderboardState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)

@@ -81,6 +81,7 @@ void MenuState::initText() {
 
 MenuState::MenuState()
 {
+    this->mouseHeld = false;
 }
 
 MenuState::MenuState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)

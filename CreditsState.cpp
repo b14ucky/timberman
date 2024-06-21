@@ -2,6 +2,7 @@
 
 CreditsState::CreditsState()
 {
+    this->mouseHeld = false;
 }
 
 CreditsState::CreditsState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)

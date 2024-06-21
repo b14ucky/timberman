@@ -1,6 +1,10 @@
 #include "State.h"
 
-State::State() {}
+State::State() 
+{
+    this->window = nullptr;
+    this->stateManager = nullptr;
+}
 
 State::State(sf::RenderWindow *window, StateManager *stateManager)
 {
