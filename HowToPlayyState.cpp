@@ -2,6 +2,7 @@
 
 HowToPlayyState::HowToPlayyState()
 {
+	this->mouseHeld = false;
 }
 
 HowToPlayyState::HowToPlayyState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)

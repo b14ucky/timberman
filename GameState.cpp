@@ -253,7 +253,10 @@ void GameState::saveScore()
     }
 }
 
-GameState::GameState() {}
+GameState::GameState() 
+{
+    this->initVariable();
+}
 
 GameState::GameState(sf::RenderWindow* window, StateManager* stateManager, sf::Font& font) : State(window, stateManager)
 {
